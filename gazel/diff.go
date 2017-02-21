@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -33,7 +34,8 @@ func Diff(left, right []byte) error {
 	}
 	rf.Close()
 
-	cmd := exec.Command("/usr/bin/diff", lf.Name(), rf.Name())
+	fmt.Println("Unexpected diff output:")
+	cmd := exec.Command("/usr/bin/diff", "-u", lf.Name(), rf.Name())
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Run()
